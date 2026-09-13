@@ -72,6 +72,18 @@ QML runtime behavior, actual client discovery on your laptop, energy measurement
 
 Report a problem with the skill commit, relevant host/client versions, a minimal non-sensitive example, expected behavior and observed behavior. Remove secrets and private paths before opening an issue. Do not publish another project's private source without permission.
 
+## Community sources and adaptation
+
+The guidance uses independently written, Omarchy-specific recommendations informed by these sources; it does not install, bundle or automatically load their skill packs:
+
+- [Superpowers](https://github.com/obra/superpowers): investigate before fixing, verify completion claims and assess review feedback against the actual code. This package does not adopt destructive live-tree regression reverts or mandatory orchestration.
+- [Karpathy Guidelines](https://github.com/multica-ai/andrej-karpathy-skills): keep changes scoped and choose observable acceptance checks before editing.
+- [Qt translation workflow](https://github.com/a5c-ai/babysitter/tree/main/library/specializations/desktop-development/skills/qt-translation-workflow): catalog context and translation lifecycle as review topics, not a copied implementation. The [Qt TS format](https://doc.qt.io/qt-6/linguist-ts-file-format.html) and [QTranslator contract](https://doc.qt.io/qt-6/qtranslator.html) are the technical references; check the installed Qt version.
+- [SkillCorpus](https://github.com/EverMind-AI/SkillCorpus): select relevant advice, including none when unsuitable. Catalog ranking does not establish safety, host compatibility or a license to redistribute a particular skill. No hosted retrieval service is required or enabled here.
+- [SkillsBench](https://www.skillsbench.ai/) and [Tessl](https://tessl.io/registry): skill quality and measured task outcomes are different questions. Their results are not evidence that this package improves your model.
+
+For any future performance claim, record the exact skill/model/host versions, whether the skill actually loaded, comparable tasks and budgets, repeated outcomes including failures, and resource usage. A handful of examples or another project's leaderboard is not validation of this package. No model benchmark has been run for this update.
+
 ## License
 
 Original package text and illustrative examples: [MIT](LICENSE). Linked upstream documentation and software retain their respective licenses. This repository is not affiliated with or endorsed by Omarchy, Quickshell or OpenCode.
