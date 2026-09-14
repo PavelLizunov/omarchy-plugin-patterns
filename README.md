@@ -1,14 +1,14 @@
 # omarchy-plugin-patterns
 
-An experimental agent skill for writing and reviewing Omarchy Quattro plugins with QML and Quickshell. It guides architecture, process and privilege handling, polling, data validation, ownership, localization readiness and translation.
+An experimental agent skill for writing and reviewing Omarchy Quattro plugins in QML and Quickshell. It gives a coding agent guides for choosing system interfaces, handling processes and credentials, checking object lifetimes, and preparing UI strings for translation.
 
-**Community guidance informed by empirical static research, not an official Omarchy API or a security certification.** The architecture patterns in this skill were synthesized from static analysis records across 3,086 community plugin reports from the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory). Examples need checking against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
+Use it when building a plugin or reviewing an existing one. The guides cover questions such as which updates should run while a panel is closed, where incoming data needs bounds, and what a localized message needs beyond a translated string. Check the examples against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
 
 ## Install in OpenCode
 
-Requires OpenCode with skill support. Git is only needed for the clone/update method below. The skill itself is Markdown: no C/C++ library, npm package, Python runtime, daemon, paid translation service or separate anti-slop installation is required. Dependencies of a plugin you build are separate.
+Requires OpenCode with skill support. The package is six Markdown documents: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
 
-Clone into a new skill directory; if one already exists, inspect it first rather than overwrite it:
+Clone into a new directory. If the destination already exists, inspect it first and preserve any local edits:
 
 ```bash
 mkdir -p "$HOME/.config/opencode/skills"
@@ -20,80 +20,82 @@ Start a new OpenCode session in your plugin project and ask:
 
 > Load omarchy-plugin-patterns. Check the installed host versions and help me write a plugin for …
 
-For readiness only:
+For a read-only translation-readiness review:
 
 > Load omarchy-plugin-patterns and perform a Localization Readiness Review of this plugin. Read the source, report contextual findings and separate coverage measures. Do not modify files or translate yet.
 
-Russian prompts work too:
+A Russian prompt is also supported:
 
 > Загрузи omarchy-plugin-patterns. Проверь готовность этого плагина к переводу: прочитай исходники, покажи подтверждённые проблемы, защитные механизмы и неизвестные данные. Пока ничего не меняй.
 
-Confirm that the agent actually loads the skill. If absent, check the exact folder/SKILL.md spelling, duplicate skill names, skill-tool enablement and OpenCode permissions. Do not bypass a denied skill. Installation paths and discovery rules: [OpenCode documentation](https://opencode.ai/docs/skills/).
+Confirm that the agent loads the skill. If it is missing, check the folder and `SKILL.md` spelling, duplicate skill names, skill-tool enablement and OpenCode permissions. Report a denied skill rather than bypassing the denial. See the [OpenCode documentation](https://opencode.ai/docs/skills/) for discovery rules.
 
-Alternatively, download the repository and copy `SKILL.md` plus the five `references/*.md` files to that folder. Keep the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid installing duplicate copies that OpenCode would discover. Live client discovery is not certified by the package layout alone.
+For manual installation, copy `SKILL.md` and the five `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
 
 ## What the agent reads
 
+The skill directs the agent to the references relevant to its task:
+
 | File | Purpose |
 |---|---|
-| [SKILL.md](SKILL.md) | Entry, trust rules and on-demand routing |
-| [plugin-authoring.md](references/plugin-authoring.md) | Architecture, parsing and ownership |
-| [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence |
+| [SKILL.md](SKILL.md) | Entry point, trust rules and task routing |
+| [plugin-authoring.md](references/plugin-authoring.md) | Component architecture, parsing and memory ownership |
+| [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence grades |
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
-| [performance-review.md](references/performance-review.md) | Services, helpers, timers and FileView |
-| [localization-review.md](references/localization-review.md) | Readiness inventory, translation, anti-slop, CLDR, RTL and accessibility |
+| [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
+| [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
 
-Localization Readiness Review reads one authorized plugin. It distinguishes suspected patterns from demonstrated defects and reports source readiness, locale fill, structural validity and language-review coverage separately. Missing denominators stay unknown. It is not a bulk scanner, translation runtime, exporter or automatic PR generator.
+A Localization Readiness Review covers one authorized plugin. It separates suspected patterns from demonstrated defects and reports source readiness, locale fill, structural validity and language-review coverage independently. Missing denominators remain unknown. This mode produces a review, not bulk scans, translation runtimes, exports or automatic pull requests.
 
-For requested translations, the agent preserves technical tokens and whole-message semantics, translates, checks style, then verifies meaning and formatter structure. It may use a suitable translation skill and `anti-slop` if actually available and authorized. Both have bundled local fallbacks; missing external skills do not become hidden dependencies. Style review is not language-quality approval.
+For requested translations, the agent preserves technical tokens and whole-message meaning, translates, checks wording and verifies formatter structure. It can use a translation skill and `anti-slop` when available and authorized; bundled fallbacks keep them optional. Style checks do not replace language review.
 
 ## Update or pin a test
 
-Check local edits and current revision before updating:
+Check local edits and the current revision before updating:
 
 ```bash
 git -C "$HOME/.config/opencode/skills/omarchy-plugin-patterns" status --short
 git -C "$HOME/.config/opencode/skills/omarchy-plugin-patterns" rev-parse HEAD
 ```
 
-Only with a clean tree and after reviewing the upstream changes:
+Review the upstream changes, then update only with a clean working tree:
 
 ```bash
 git -C "$HOME/.config/opencode/skills/omarchy-plugin-patterns" pull --ff-only
 ```
 
-For reproducible tests, keep the recorded commit until you intentionally update. Do not discard local edits to force an update. To disable a Git-cloned installation, move the whole folder outside all skill-discovery directories; this preserves edits and the recorded revision.
+Keep the recorded commit for reproducible tests until you intentionally update. Do not discard local edits to force an update. To disable a Git-cloned installation, move its entire folder outside every skill-discovery directory; that keeps the edits and recorded revision together.
 
 ## Limits and feedback
 
-The skill cannot force a model to follow its instructions. Inspect generated changes, dependency choices and authorized runtime tests before using a plugin. Do not interpret a static `pass`, valid catalog keys or fluent-looking text as proof of safety, translation correctness, RTL layout or screen-reader behavior.
+These are community recommendations, not an official Omarchy API or security certification. A Markdown skill cannot force a model to follow instructions. Review its changes and dependencies, then run the authorized checks for the installed host before using a plugin. Installing the skill itself executes no plugin code.
 
-QML runtime behavior, actual client discovery on your laptop, energy measurements, rendered layout and fluent-human language acceptance remain separate checks. Permission-denied tools and unavailable reviewers must be reported, not simulated. No plugin code runs merely by installing this package.
+Static review can identify a configured timer or command, but CPU, battery use and runtime behavior need measurements. Translation accuracy, rendered layout, RTL and screen-reader behavior need their own checks as well: valid keys and fluent-looking text do not establish those results. Unavailable reviewers, denied tools and unperformed checks must be reported, not simulated.
 
-Report a problem with the skill commit, relevant host/client versions, a minimal non-sensitive example, expected behavior and observed behavior. Remove secrets and private paths before opening an issue. Do not publish another project's private source without permission.
+To report a problem, include the skill commit, host/client versions, a minimal non-sensitive example, and expected and observed behavior. Remove secrets and private paths; share another project's private code only with permission.
 
-## Empirical research and provenance
+## Research context and provenance
 
-The rules in this skill were informed by research from the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory), an exploratory static analysis dataset comprising **3,086 plugin report records** across 311 chunks, capturing **10,310 preserved evidence anchors**. These records represent historical static observations from automated analysis, subject to ongoing review and corrections rather than an exhaustive census or blanket runtime verification:
+The [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory) informed this skill with **3,086 historical plugin report records**, grouped into 311 chunks, and **10,310 preserved evidence anchors**. The automated assessments remain subject to source review and corrections. They are neither a verified ecosystem census nor runtime-tested findings.
 
-- **Timer hygiene and background wakeups:** Selected static examples included unthrottled background timers running without UI visibility gating (such as repeating timers triggering multiple `playerctl` CLI processes every 2 seconds, or sub-100ms `hyprctl` polling loops). The skill guides gating detail polling to visible UI states while preserving necessary background status updates.
-- **Event-driven IPC over process polling:** Integrating via native UNIX domain sockets (`Quickshell.Io.Socket`) or D-Bus signals (`Quickshell.Services`) handles events reactively and avoids recurring CLI queries for specific data.
-- **Privilege boundaries and credential handling:** Historical review records identified patterns such as collecting passwords in UI `TextField` elements for `sudo -S`, installer hooks creating symlinks to user-writable files, or direct `/etc/` modifications. Rather than treating all privileged commands as malicious escalation, the skill emphasizes clear trust boundaries: avoid handling user passwords directly in UI fields, avoid silent system modifications, and delegate authentication to session Polkit agents and operation-scoped D-Bus services.
-- **Defensive parsing:** Malformed or unexpected external JSON input can break QML property bindings. The skill guides wrapping external JSON parsing in `try/catch` with subsequent schema, type, and range validation, recognizing that syntax error handling alone is not complete data validation.
-- **Centralized localization:** Localized copies of plugins exist across the ecosystem; adopting shared translation catalogs and workflows can reduce synchronization work while crediting ongoing upstream development. The skill provides guidelines for single-repository translation catalogs, message extraction context, CLDR plurals, fallback mechanisms, and accessibility.
+Selected examples include a two-second timer requesting multiple `playerctl` processes and an 80ms `hyprctl` timer with guards against overlapping work. They motivate separating detail-only polling from necessary background status updates. Unix sockets and supported D-Bus services offer event-driven alternatives for particular data; their use alone says nothing about measured CPU or battery cost.
+
+Credential handling and parsing require attention to the whole path. UI fields feeding `sudo -S` expose passwords to the plugin process, while an installer hook creating a symlink raises different integrity questions. Use operation-specific services with appropriate authorization and the session's authentication agent where supported. For external JSON, pair parse-error handling with bounds and structure/range checks. A `try/catch` cannot provide all of those protections.
+
+Localized plugin copies also show why translation workflows matter. Shared catalogs can reduce synchronization work; the localization guide covers message context, plurals, fallbacks and accessibility while leaving room for the installed shell's capabilities and existing community work.
 
 ## Community sources and adaptation
 
-The guidance uses independently written, Omarchy-specific recommendations informed by these sources; it does not install, bundle or automatically load their skill packs:
+The recommendations are written for Omarchy and informed by these sources. This package does not install, bundle or automatically load their skill packs:
 
-- [Superpowers](https://github.com/obra/superpowers): investigate before fixing, verify completion claims and assess review feedback against the actual code. This package does not adopt destructive live-tree regression reverts or mandatory orchestration.
-- [Karpathy Guidelines](https://github.com/multica-ai/andrej-karpathy-skills): keep changes scoped and choose observable acceptance checks before editing.
-- [Qt translation workflow](https://github.com/a5c-ai/babysitter/tree/main/library/specializations/desktop-development/skills/qt-translation-workflow): catalog context and translation lifecycle as review topics, not a copied implementation. The [Qt TS format](https://doc.qt.io/qt-6/linguist-ts-file-format.html) and [QTranslator contract](https://doc.qt.io/qt-6/qtranslator.html) are the technical references; check the installed Qt version.
-- [SkillCorpus](https://github.com/EverMind-AI/SkillCorpus): select relevant advice, including none when unsuitable. Catalog ranking does not establish safety, host compatibility or a license to redistribute a particular skill. No hosted retrieval service is required or enabled here.
-- [SkillsBench](https://www.skillsbench.ai/) and [Tessl](https://tessl.io/registry): skill quality and measured task outcomes are different questions. Their results are not evidence that this package improves your model.
+- [Superpowers](https://github.com/obra/superpowers): investigate before fixing, verify completion against behavior and assess review feedback against the actual code. Destructive live-tree regression reverts and mandatory orchestration are not adopted here.
+- [Karpathy Guidelines](https://github.com/multica-ai/andrej-karpathy-skills): keep changes scoped and choose observable checks before editing.
+- [Qt translation workflow](https://github.com/a5c-ai/babysitter/tree/main/library/specializations/desktop-development/skills/qt-translation-workflow): catalog context and translation lifecycle as review topics. The [Qt TS format](https://doc.qt.io/qt-6/linguist-ts-file-format.html) and [QTranslator contract](https://doc.qt.io/qt-6/qtranslator.html) provide the technical references; check the installed Qt version.
+- [SkillCorpus](https://github.com/EverMind-AI/SkillCorpus): select relevant advice, including none when unsuitable. A catalog rank says nothing about safety, host compatibility or redistribution rights. No hosted retrieval service is required or enabled.
+- [SkillsBench](https://www.skillsbench.ai/) and [Tessl](https://tessl.io/registry): their evaluations do not establish how this skill performs with your model.
 
-For any future performance claim, record the exact skill/model/host versions, whether the skill actually loaded, comparable tasks and budgets, repeated outcomes including failures, and resource usage. A handful of examples or another project's leaderboard is not validation of this package. No model benchmark has been run for this update.
+No model benchmark has been run for this update. A future performance claim would need the exact skill/model/host versions, confirmation that the skill loaded, comparable tasks and budgets, repeated outcomes including failures, and resource measurements. Examples and third-party leaderboards cannot supply that evidence.
 
 ## License
 
-Original package text and illustrative examples: [MIT](LICENSE). Linked upstream documentation and software retain their respective licenses. This repository is not affiliated with or endorsed by Omarchy, Quickshell or OpenCode.
+Original package text and illustrative examples: [MIT](LICENSE). Linked documentation and software retain their own terms. This project is not affiliated with or endorsed by Omarchy, Quickshell or OpenCode.
