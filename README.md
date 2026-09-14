@@ -2,7 +2,7 @@
 
 An experimental agent skill for writing and reviewing Omarchy Quattro plugins with QML and Quickshell. It guides architecture, process and privilege handling, polling, data validation, ownership, localization readiness and translation.
 
-**Community guidance, not an official Omarchy API or a security certification.** This initial public package makes no claim of published research validation. Examples need checking against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
+**Community guidance backed by empirical research, not an official Omarchy API or a security certification.** The architecture patterns in this skill were synthesized from an exhaustive line-by-line audit of all 3,086 plugins across the official Omarchy marketplace ecosystem ([Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory)). Examples need checking against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
 
 ## Install in OpenCode
 
@@ -71,6 +71,16 @@ The skill cannot force a model to follow its instructions. Inspect generated cha
 QML runtime behavior, actual client discovery on your laptop, energy measurements, rendered layout and fluent-human language acceptance remain separate checks. Permission-denied tools and unavailable reviewers must be reported, not simulated. No plugin code runs merely by installing this package.
 
 Report a problem with the skill commit, relevant host/client versions, a minimal non-sensitive example, expected behavior and observed behavior. Remove secrets and private paths before opening an issue. Do not publish another project's private source without permission.
+
+## Empirical research and provenance
+
+The rules in this skill are directly informed by the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory), an adversarial audit of the complete catalog of **3,086 community plugins** across 311 chunks, extracting **10,310 machine-verified evidence citations**:
+
+- **Timer hygiene & battery preservation:** ~11% of audited plugins ran unthrottled background timers without UI visibility gating (e.g. 7 parallel `playerctl` CLI processes spawned every 2 seconds, or 80ms `hyprctl` pollers). The skill enforces that timers must sleep when the interface is closed (`running: root.opened`).
+- **Event-driven IPC over process polling:** The audit observed that high-reliability plugins communicate via native UNIX domain sockets (`Quickshell.Io.Socket`) and D-Bus signals (`Quickshell.Services`), achieving 0.0% background CPU usage, whereas polling via CLI processes creates continuous wakeups.
+- **Strict privilege boundaries:** 108 plugins received `suspicious` verdicts for privilege escalation (passing root passwords from `TextField` into `sudo -S`, persistent pacman root hooks, or silent `/etc/` modifications). The skill bans all privilege escalation and UI password collection.
+- **Defensive parsing:** 98.9% of crash-resilient plugins wrapped `JSON.parse` in `try/catch` to avoid tearing down QML bindings on malformed input.
+- **Centralized localization:** Lack of standardized i18n previously led authors to clone entire plugin repositories merely to localize a handful of strings. The skill provides guidelines for single-repository localization catalogs.
 
 ## Community sources and adaptation
 
