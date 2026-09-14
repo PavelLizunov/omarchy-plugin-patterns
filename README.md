@@ -2,7 +2,7 @@
 
 An experimental agent skill for writing and reviewing Omarchy Quattro plugins with QML and Quickshell. It guides architecture, process and privilege handling, polling, data validation, ownership, localization readiness and translation.
 
-**Community guidance backed by empirical research, not an official Omarchy API or a security certification.** The architecture patterns in this skill were synthesized from an exhaustive line-by-line audit of all 3,086 plugins across the official Omarchy marketplace ecosystem ([Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory)). Examples need checking against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
+**Community guidance informed by empirical static research, not an official Omarchy API or a security certification.** The architecture patterns in this skill were synthesized from static analysis records across 3,086 community plugin reports from the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory). Examples need checking against your installed Omarchy, Qt and Quickshell versions; they are not complete runtime-tested plugins.
 
 ## Install in OpenCode
 
@@ -38,7 +38,7 @@ Alternatively, download the repository and copy `SKILL.md` plus the five `refere
 |---|---|
 | [SKILL.md](SKILL.md) | Entry, trust rules and on-demand routing |
 | [plugin-authoring.md](references/plugin-authoring.md) | Architecture, parsing and ownership |
-| [plugin-review.md](references/plugin-review.md) | Six-dimensional static review and evidence |
+| [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence |
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, helpers, timers and FileView |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, anti-slop, CLDR, RTL and accessibility |
@@ -74,13 +74,13 @@ Report a problem with the skill commit, relevant host/client versions, a minimal
 
 ## Empirical research and provenance
 
-The rules in this skill are directly informed by the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory), an adversarial audit of the complete catalog of **3,086 community plugins** across 311 chunks, extracting **10,310 machine-verified evidence citations**:
+The rules in this skill were informed by research from the [Omarchy Plugin Observatory](https://github.com/PavelLizunov/omarchy-plugin-observatory), an exploratory static analysis dataset comprising **3,086 plugin report records** across 311 chunks, capturing **10,310 preserved evidence anchors**. These records represent historical static observations from automated analysis, subject to ongoing review and corrections rather than an exhaustive census or blanket runtime verification:
 
-- **Timer hygiene & battery preservation:** ~11% of audited plugins ran unthrottled background timers without UI visibility gating (e.g. 7 parallel `playerctl` CLI processes spawned every 2 seconds, or 80ms `hyprctl` pollers). The skill enforces that timers must sleep when the interface is closed (`running: root.opened`).
-- **Event-driven IPC over process polling:** The audit observed that high-reliability plugins communicate via native UNIX domain sockets (`Quickshell.Io.Socket`) and D-Bus signals (`Quickshell.Services`), achieving 0.0% background CPU usage, whereas polling via CLI processes creates continuous wakeups.
-- **Strict privilege boundaries:** 108 plugins received `suspicious` verdicts for privilege escalation (passing root passwords from `TextField` into `sudo -S`, persistent pacman root hooks, or silent `/etc/` modifications). The skill bans all privilege escalation and UI password collection.
-- **Defensive parsing:** 98.9% of crash-resilient plugins wrapped `JSON.parse` in `try/catch` to avoid tearing down QML bindings on malformed input.
-- **Centralized localization:** Lack of standardized i18n previously led authors to clone entire plugin repositories merely to localize a handful of strings. The skill provides guidelines for single-repository localization catalogs.
+- **Timer hygiene and background wakeups:** Selected static examples included unthrottled background timers running without UI visibility gating (such as repeating timers triggering multiple `playerctl` CLI processes every 2 seconds, or sub-100ms `hyprctl` polling loops). The skill guides gating detail polling to visible UI states while preserving necessary background status updates.
+- **Event-driven IPC over process polling:** Integrating via native UNIX domain sockets (`Quickshell.Io.Socket`) or D-Bus signals (`Quickshell.Services`) handles events reactively and avoids recurring CLI queries for specific data.
+- **Privilege boundaries and credential handling:** Historical review records identified patterns such as collecting passwords in UI `TextField` elements for `sudo -S`, installer hooks creating symlinks to user-writable files, or direct `/etc/` modifications. Rather than treating all privileged commands as malicious escalation, the skill emphasizes clear trust boundaries: avoid handling user passwords directly in UI fields, avoid silent system modifications, and delegate authentication to session Polkit agents and operation-scoped D-Bus services.
+- **Defensive parsing:** Malformed or unexpected external JSON input can break QML property bindings. The skill guides wrapping external JSON parsing in `try/catch` with subsequent schema, type, and range validation, recognizing that syntax error handling alone is not complete data validation.
+- **Centralized localization:** Localized copies of plugins exist across the ecosystem; adopting shared translation catalogs and workflows can reduce synchronization work while crediting ongoing upstream development. The skill provides guidelines for single-repository translation catalogs, message extraction context, CLDR plurals, fallback mechanisms, and accessibility.
 
 ## Community sources and adaptation
 

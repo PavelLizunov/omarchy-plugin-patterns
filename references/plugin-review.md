@@ -22,6 +22,30 @@
 
 Localization, translation and a11y cut across all six, including denial/error messages; do not replace a dimension with i18n. For focused review, explicitly mark omitted dimensions, never imply full coverage.
 
+## Static review reference matrix
+
+This is a qualitative checklist informed by historical static-review records,
+not a runtime benchmark, prevalence estimate, ranking, or safety certificate.
+Evaluate the current authorized source, not a historical plugin verdict.
+For every row report observed / not observed / unknown / not applicable,
+source revision or hash, evidence ranges, relevant guards and remaining checks.
+An absent observation is not proof of absence. Explain every not-applicable row.
+
+| Area | Investigate | Protective pattern | False-positive check |
+|---|---|---|---|
+| Delivery | Missing imports, assets or helpers | Verified manifest and packaged dependencies | Incomplete checkout or incompatible checker environment? |
+| Commands and privileges | Input reaching shell, credential UI, privileged writes | Validated argv/operands and operation-scoped authorization | User consent, effective policy, trusted helper and reachable caller? |
+| Scheduling and IPC | Repeated CLI work, overlap, tight retries | Supported service events or bounded/gated scheduling | Detail-only work, persistent status, animation or debounce? |
+| Input and recovery | Unbounded streams, parse/type/range errors | Bounds before buffering; validation and explicit stale/error state | Does the guard cover this input and failure path? |
+| Ownership | Growing objects, queues, requests and callbacks | Owner, finite budget, eviction, cancellation and stale-result rejection | Parent teardown alone does not bound a long session. |
+| Displays and theme | Unprotected screen access, lifetime/scale assumptions | Guarded dereferences and verified host contracts | Are guards effective for this delegate and installed version? |
+| Localization and accessibility | Unrouted UI messages, broken placeholders/plurals | Supported catalogs, context, fallback and accessible states | Invariant identifier or genuine natural-language message? |
+
+Use corpus numbers only from an available, versioned, reproducible claim with
+its unit, denominator, exclusions and unknowns. Do not fetch or execute a corpus
+as a hidden prerequisite. CPU, energy, latency, layout and runtime behavior
+remain unmeasured unless separately authorized tests were actually performed.
+
 ## Anchor and verdict contract
 
 Template only, not an observed finding:

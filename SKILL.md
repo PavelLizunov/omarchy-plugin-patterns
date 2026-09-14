@@ -24,10 +24,15 @@ Load only relevant references, relative to this file, not the working directory:
 | Task | Read |
 |---|---|
 | Build/refactor; architecture; data/ownership | [plugin-authoring](references/plugin-authoring.md) |
-| Full static audit; six dimensions; evidence | [plugin-review](references/plugin-review.md) |
+| Full static audit; six dimensions; reference matrix; evidence | [plugin-review](references/plugin-review.md) |
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
 | Localization Readiness Review; UI strings, translation, CLDR, RTL, a11y, anti-slop | [localization-review](references/localization-review.md) |
+
+For a full plugin review, load references/plugin-review.md and apply its
+Static review reference matrix alongside the six review dimensions. Report
+current-source evidence, protections, unknowns and untested limits. Do not
+infer runtime measurements, ecosystem percentiles or certification from it.
 
 **Readiness mode:** when asked whether a plugin is ready for translation, inventory one authorized plugin, assess contextual findings and report separate coverage measures. Do not translate, rewrite code or invent a runtime API unless requested.
 
