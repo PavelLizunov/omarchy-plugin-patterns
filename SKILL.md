@@ -28,6 +28,7 @@ Load only relevant references, relative to this file, not the working directory:
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
 | Localization Readiness Review; UI strings, translation, CLDR, RTL, a11y, anti-slop | [localization-review](references/localization-review.md) |
+| High-resolution screenshots from available QML UI sources | [screenshot-rerender](references/screenshot-rerender.md) |
 
 For a full plugin review, load references/plugin-review.md and apply its
 Static review reference matrix alongside the six review dimensions. Report
