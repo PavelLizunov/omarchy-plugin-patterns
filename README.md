@@ -6,7 +6,7 @@ Use it when building a plugin or reviewing an existing one. The guides cover que
 
 ## Install in OpenCode
 
-Requires OpenCode with skill support. The package is six Markdown documents: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
+Requires OpenCode with skill support. The package is seven Markdown documents: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
 
 Clone into a new directory. If the destination already exists, inspect it first and preserve any local edits:
 
@@ -30,7 +30,7 @@ A Russian prompt is also supported:
 
 Confirm that the agent loads the skill. If it is missing, check the folder and `SKILL.md` spelling, duplicate skill names, skill-tool enablement and OpenCode permissions. Report a denied skill rather than bypassing the denial. See the [OpenCode documentation](https://opencode.ai/docs/skills/) for discovery rules.
 
-For manual installation, copy `SKILL.md` and the five `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
+For manual installation, copy `SKILL.md` and the six `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
 
 ## What the agent reads
 
@@ -44,6 +44,7 @@ The skill directs the agent to the references relevant to its task:
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
+| [screenshot-rerender.md](references/screenshot-rerender.md) | Source-based QML rerenders and before/after comparison pages |
 
 A Localization Readiness Review covers one authorized plugin. It separates suspected patterns from demonstrated defects and reports source readiness, locale fill, structural validity and language-review coverage independently. Missing denominators remain unknown. This mode produces a review, not bulk scans, translation runtimes, exports or automatic pull requests.
 
