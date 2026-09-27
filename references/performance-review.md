@@ -6,7 +6,7 @@ For each timer/process/request record owner, admission gate, maximum concurrency
 
 ## B — One streaming helper with delayed recovery
 
-Integration fragment inside `Item { id: root }` with `import QtQuick` and `import Quickshell.Io`. Prerequisites: reviewed executable `helperPath`, host-wired `allowed` (enabled AND awake), `acceptFrame` validator and an owned lifecycle controller. The controller performs initial start, failed-start timeout and shutdown; this fragment supplies the crash-retry path, not an entire daemon implementation.
+Integration fragment inside `Item { id: root }` with `import QtQuick` and `import Quickshell.Io`. Prerequisites: reviewed executable `helperPath`, host-wired boolean `allowed` (known enabled AND known awake), `acceptFrame` validator and an owned lifecycle controller. The controller performs initial start, failed-start timeout and shutdown; this fragment supplies the crash-retry path, not an entire daemon implementation.
 
 ```qml
 Process {
@@ -15,11 +15,11 @@ Process {
     stdinEnabled: true
     stdout: SplitParser {
         onRead: data => {
-            if (root.allowed) root.acceptFrame(data);
+            if (root.allowed === true) root.acceptFrame(data);
         }
     }
     onExited: {
-        if (root.allowed) retry.restart();
+        if (root.allowed === true) retry.restart();
     }
 }
 Timer {
@@ -27,7 +27,7 @@ Timer {
     interval: 2000
     repeat: false
     onTriggered: {
-        if (root.allowed && !helper.running)
+        if (root.allowed === true && !helper.running)
             helper.running = true;
     }
 }
@@ -96,21 +96,30 @@ Timer {
 
 ## C — Separate detail polling from status cadence
 
-QtQuick Timer fragments require application-owned opened/sleeping state and `busy`. `refresh()` must acquire busy synchronously, release on every terminal path, time out stalls and discard obsolete results. Do not queue missed polls.
+QtQuick fragments require application-owned `pluginEnabled`, `opened`, `sleeping` and `busy` state. These are adapters, not host APIs. Preserve unknown values as nullable `var` until validated; coercing missing data into a QML `bool` can turn unknown into false before a comparison sees it. If an adapter already uses booleans, add and require an explicit readiness flag covering those values. Do not confuse Item's visual `enabled` property with plugin lifecycle authorization.
+
+Define these gates once in the owning Item and reuse them for admission and completion:
+
+```qml
+readonly property bool workAllowed: root.pluginEnabled === true && root.sleeping === false
+readonly property bool detailAllowed: root.workAllowed && root.opened === true
+```
+
+`refresh()` must acquire `busy` synchronously, release on every terminal path, time out stalls and discard obsolete results. Only `busy === false` is idle. Do not queue missed polls.
 
 ```qml
 Timer {
     interval: 2000
     repeat: true
-    running: root.opened && !root.sleeping
+    running: root.detailAllowed
     onTriggered: {
-        if (root.opened && !root.sleeping && !root.busy)
+        if (root.detailAllowed && root.busy === false)
             root.refresh();
     }
 }
 ```
 
-For **persistent panel status**, replace that schedule (do not run both) with `interval: root.opened ? 2000 : 20000` and `running: root.enabled && !root.sleeping`; recheck the same gate at dispatch. Active cadence 1–2s; justified background cadence 20–300s. Detail-only work stays off when closed. Unknown lifecycle state must deny admission.
+For **persistent panel status**, replace that schedule (do not run both) with `interval: root.opened === true ? 2000 : 20000` and `running: root.workAllowed`; recheck the same gate at dispatch. Active cadence 1–2s; justified background cadence 20–300s. Detail-only work stays off when closed. Unknown lifecycle state must deny admission.
 
 Slider debounce:
 
@@ -120,7 +129,7 @@ Timer {
     interval: 250
     repeat: false
     onTriggered: {
-        if (root.opened && !root.sleeping)
+        if (root.detailAllowed)
             root.dispatchLatestIfIdle();
     }
 }
@@ -130,31 +139,33 @@ User edits call `debounce.restart()`. Every subsecond slider debounce MUST be on
 
 ## D — FileView without telemetry CLI
 
-QtQuick + Quickshell.Io fragment inside a root with opened/sleeping, `raw` string and `readError` boolean. FileView reads through native C++ file I/O, without `cat`, `free`, `top`, `awk` or fork/exec. Choose trusted small kernel files; FileView is not an arbitrary-input byte limiter.
+QtQuick + Quickshell.Io fragment using the gates from C, `raw` string and `readError` boolean. FileView reads through native C++ file I/O, without `cat`, `free`, `top`, `awk` or fork/exec. Choose trusted small kernel files; FileView is not an arbitrary-input byte limiter.
 
 ```qml
 FileView {
     id: telemetry
-    path: root.opened && !root.sleeping ? "/proc/meminfo" : ""
+    path: root.detailAllowed ? "/proc/meminfo" : ""
     blockLoading: false
     blockAllReads: false
     onLoaded: {
-        if (root.opened && !root.sleeping) {
+        if (root.detailAllowed) {
             root.raw = telemetry.text();
             root.readError = false;
         }
     }
-    onLoadFailed: { root.raw = ""; root.readError = true; }
+    onLoadFailed: {
+        if (root.detailAllowed) { root.raw = ""; root.readError = true; }
+    }
 }
 Timer {
     interval: 2000
     repeat: true
-    running: root.opened && !root.sleeping
-    onTriggered: telemetry.reload()
+    running: root.detailAllowed
+    onTriggered: { if (root.detailAllowed) telemetry.reload(); }
 }
 ```
 
-Gate **path acquisition**, not just reload: default preloading otherwise reads while closed. Empty path unloads; clear or mark published data stale on close and ignore late callbacks. Confirm target-version reload serialization and completion semantics before selecting cadence; avoid overlapping native work. Procfs/sysfs may not notify changes, so watchChanges is not universal telemetry. Parse documented units after successful load; no direct-memory-mapping claim. Native I/O and synchronous parsing can still cost CPU or block UI.
+Gate **path acquisition**, not just reload: default preloading otherwise reads while closed. Empty path unloads; clear or mark published data stale on close and ignore late callbacks. A gate alone cannot identify a stale reply after close/reopen: use a generation/path identity or serialize completion and reopening in the owning controller. Confirm target-version reload serialization and completion semantics before selecting cadence; avoid overlapping native work. Procfs/sysfs may not notify changes, so watchChanges is not universal telemetry. Parse documented units after successful load; no direct-memory-mapping claim. Native I/O and synchronous parsing can still cost CPU or block UI.
 
 ## Measurement boundary and sources
 

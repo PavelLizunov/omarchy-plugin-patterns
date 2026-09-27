@@ -52,7 +52,10 @@ automatic selection.
 
 The workflow discovers available capture tools and reuses the owning QML harness.
 Inline annotations use the host's presentation capability when available. This
-package installs no capture MCP or server. A fixture render, report interaction
+package installs no capture MCP or server. High-resolution capture first follows
+[visual preflight](references/visual-review.md), then the
+[rerender guide](references/screenshot-rerender.md), preserving logical geometry
+and declaring source/target DPR. A fixture render, report interaction
 and live native behavior are separate evidence surfaces.
 
 Tabbed panels have an explicit [stable frame pattern](references/design-review.md#keep-tabbed-panel-geometry-stable):
@@ -99,7 +102,7 @@ Keep the recorded commit for reproducible tests until you intentionally update. 
 
 ## Limits and feedback
 
-These are community recommendations, not an official Omarchy API or security certification. A Markdown skill cannot force a model to follow instructions. Review its changes and dependencies, then run the authorized checks for the installed host before using a plugin. Installing the skill itself executes no plugin code.
+These are community recommendations, not an official Omarchy API, current Marketplace policy or security certification. Specialized contracts such as the SEC-005 WebP profile apply only when adopted by the project. Independent review is a gate when required by the project workflow; ordinary scoped work can report direct self-review. A Markdown skill cannot force a model to follow instructions. Review its changes and dependencies, then run the authorized checks for the installed host before using a plugin. Installing the skill itself executes no plugin code.
 
 Static review can identify a configured timer or command, but CPU, battery use and runtime behavior need measurements. Translation accuracy, rendered layout, RTL and screen-reader behavior need their own checks as well: valid keys and fluent-looking text do not establish those results. Unavailable reviewers, denied tools and unperformed checks must be reported, not simulated.
 

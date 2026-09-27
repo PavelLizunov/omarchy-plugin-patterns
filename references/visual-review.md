@@ -47,6 +47,13 @@ Where a Qt Quick Test runner already exists, `QT_QPA_PLATFORM=offscreen` and
 and import paths; these environment settings do not launch the production shell
 or prove compositor behavior. Do not start another shared Quickshell instance.
 
+Match the backend to the component's features. Qt's software adaptation cannot
+render ShaderEffect; passing geometry/input assertions there does not verify
+shader-based appearance. Use a supported, permitted renderer or mark those
+visuals unverified. Preserve a failed backend log when retrying with another
+backend and record the changed evidence scope. See
+[Qt software adaptation](https://doc.qt.io/qt-6/qtquick-visualcanvas-adaptations-software.html).
+
 For sharper text, optionally render the actual QML tree at 2× pixel density while
 preserving logical dimensions. Verify that the backend redraws text/vectors at
 that density; resizing a PNG adds no detail. Display reference and candidate at
