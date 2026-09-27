@@ -1,0 +1,4 @@
+interface:
+  display_name: "Omarchy Plugin Patterns"
+  short_description: "Native plugin design, development and review"
+  default_prompt: "Используй $omarchy-plugin-patterns для проверки дизайна этого Omarchy-плагина со снимками и кликабельным выделением замечаний."

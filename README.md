@@ -6,7 +6,7 @@ Use it when building a plugin or reviewing an existing one. The guides cover que
 
 ## Install in OpenCode
 
-Requires OpenCode with skill support. The package is seven Markdown documents: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
+Requires OpenCode with skill support. The package contains Markdown guides: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
 
 Clone into a new directory. If the destination already exists, inspect it first and preserve any local edits:
 
@@ -30,7 +30,30 @@ A Russian prompt is also supported:
 
 Confirm that the agent loads the skill. If it is missing, check the folder and `SKILL.md` spelling, duplicate skill names, skill-tool enablement and OpenCode permissions. Report a denied skill rather than bypassing the denial. See the [OpenCode documentation](https://opencode.ai/docs/skills/) for discovery rules.
 
-For manual installation, copy `SKILL.md` and the six `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
+For manual installation, copy `SKILL.md` and all `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
+
+## Explicit design review
+
+In Codex, invoke the installed skill by its exact name:
+
+> $omarchy-plugin-patterns Проверь дизайн этого Omarchy-плагина: получи реальные снимки всех значимых экранов и состояний, проверь переходы, фокус, закрытие, сохранение, ошибки и переводы. Покажи кликабельное ревью с выделенными областями. Отдели найденные ошибки от предположений и непроверенного. Сначала замечания, без исправлений.
+
+In OpenCode, ask explicitly: “Load omarchy-plugin-patterns and perform a design
+review with inspected screenshots and numbered annotations.” Confirm the agent
+reads this skill and its two design references. A shortened label such as
+“Pattern” is not the exact skill identifier.
+
+See [Codex skill invocation](https://learn.chatgpt.com/docs/build-skills).
+In the target chat, inspect its skill catalog/selector; if this name is missing,
+report discovery rather than pretending it loaded. Refer to the installed local
+SKILL.md path when needed and verify that its references are read. Explicit
+invocation does not require disabling
+automatic selection.
+
+The workflow discovers available capture tools and reuses the owning QML harness.
+Inline annotations use the host's presentation capability when available. This
+package installs no capture MCP or server. A fixture render, report interaction
+and live native behavior are separate evidence surfaces.
 
 ## What the agent reads
 
@@ -43,6 +66,8 @@ The skill directs the agent to the references relevant to its task:
 | [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence grades |
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
+| [design-review.md](references/design-review.md) | Native design, tasks, states, transitions and bounded acceptance |
+| [visual-review.md](references/visual-review.md) | Capture capabilities, QML fixtures, provenance and clickable annotations |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
 | [screenshot-rerender.md](references/screenshot-rerender.md) | Source-based QML rerenders and before/after comparison pages |
 

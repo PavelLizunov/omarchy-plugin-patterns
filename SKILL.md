@@ -1,6 +1,6 @@
 ---
 name: omarchy-plugin-patterns
-description: Design, develop, review and refactor Omarchy Quattro desktop plugins using QML, Quickshell, Wayland, Linux C++, D-Bus and Bash. Use for architecture, privileges, timers, memory, hotplug, localization readiness, translation and anti-slop review.
+description: Design, build and review Omarchy Quattro plugins. Use for native UI/UX, screenshots and annotated design review, QML architecture, processes, localization and translation.
 license: MIT
 ---
 
@@ -27,6 +27,8 @@ Load only relevant references, relative to this file, not the working directory:
 | Full static audit; six dimensions; reference matrix; evidence | [plugin-review](references/plugin-review.md) |
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
+| Design/UX; states, transitions, native styling and evidence | [design-review](references/design-review.md) |
+| Screenshots, QML captures and clickable highlighted review | [visual-review](references/visual-review.md) |
 | Localization Readiness Review; UI strings, translation, CLDR, RTL, a11y, anti-slop | [localization-review](references/localization-review.md) |
 | High-resolution screenshots from available QML UI sources | [screenshot-rerender](references/screenshot-rerender.md) |
 
@@ -39,6 +41,15 @@ infer runtime measurements, ecosystem percentiles or certification from it.
 
 **Translation hook:** whenever human-facing strings change or are translated, follow extract → translate → anti-slop → verify in the localization reference. Discover and load an authorized translation skill and `anti-slop` only if available; otherwise apply the bundled local fallback and report that choice. No required external skill, automatic subprocess hook, recursive delegation or model override. Style never overrides meaning, technical tokens or uncertainty.
 
+## Explicit design-review invocation
+
+`$omarchy-plugin-patterns` plus “проверь дизайн со скринами и выделением проблем”
+selects the design workflow. Read `references/design-review.md`, then
+`references/visual-review.md` for capture and annotations. Audit requests default
+to findings; fixes follow the user's scope. Discover capture/MCP/inline tools
+actually available in the current host. Missing capabilities stay unverified.
+No new server, native-control permission or full static audit is implied.
+
 ## Implementation defaults
 
 Prefer A reactive C++ services (no plugin polling/processes); B one bounded streaming helper with retry ≥2 seconds; C gated detail polling or dual-cadence panel status; D native FileView instead of telemetry CLI commands. D may use C's gated reload. These are starting policies, not universal timing requirements or measured performance results. Every resource needs owner, admission gate, finite budget and stop path.
@@ -47,4 +58,4 @@ Use discrete argv; system authentication belongs to Polkit/brokers, never passwo
 
 ## Delivery
 
-Deliver scope, changed paths, observed checks, evidence/unknowns and untested limits. Audit all six dimensions for a full review; localization/a11y is cross-cutting. Do not invent ecosystem statistics or empirical validation. The six Markdown documents require no native libraries or external skills; plugins built with their guidance may require version-specific dependencies. Filesystem packaging does not prove client discovery or plugin runtime compatibility.
+Deliver scope, changed paths, observed checks, evidence/unknowns and untested limits. Audit all six dimensions for a full review; localization/a11y is cross-cutting. Do not invent ecosystem statistics or empirical validation. The Markdown guides require no native libraries or external skills; plugins built with their guidance may require version-specific dependencies. Filesystem packaging does not prove client discovery or plugin runtime compatibility.
