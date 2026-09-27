@@ -33,6 +33,45 @@ font/radius/control-size recipes as version-specific examples. Reserve bounds
 across hover/focus/selection so a border or label does not shift the control.
 Avoid introducing a second design system when host facilities meet the need.
 
+## Keep tabbed panel geometry stable
+
+For tabs and editors within one task surface, keep the visible card's width,
+height and placement stable while the output, bar anchor, theme and font scale
+stay unchanged. Navigation and primary content keep their anchors as well.
+A size or monitor change can require refitting. An intentionally resizing surface
+needs an explicit product reason; do not impose the same dimensions on every
+plugin or on unrelated menus.
+
+Implement this in the owning plugin:
+
+- Let one shared container own the preferred width and height, using host tokens.
+  Fit that request through the installed host's available-screen contract.
+  Every tab and editor fills the resulting content area. Audit both requested
+  dimensions and the visible card, since screen clamping can hide a bad request.
+- Keep the preferred frame independent of the selected page, item count,
+  current page's `implicitHeight` and transient loading/error text. Give long
+  content an internal scroll viewport; short pages retain the same frame.
+- Keep navigation outside page scrolling. Editors and disclosures use the
+  existing content area, with focus scrolling in the correct viewport. Preserve
+  the intended scale of the primary image or content when details grow.
+- Refit for smaller screens and larger text using the host's bounds; wrap labels
+  and keep controls reachable through scrolling. A fixed preference must still
+  fit the available screen and leave dismissal reachable.
+
+The [MX Ergo container](https://github.com/PavelLizunov/omarchy-mx-ergo/blob/451db78fb4e8d3f22e4ed037425ed1499e1e18f3/BarWidget.qml),
+[page sizing](https://github.com/PavelLizunov/omarchy-mx-ergo/blob/451db78fb4e8d3f22e4ed037425ed1499e1e18f3/ErgoPanel.qml)
+and [consumer checks](https://github.com/PavelLizunov/omarchy-mx-ergo/blob/451db78fb4e8d3f22e4ed037425ed1499e1e18f3/tests/profiles-ui/tst_editor.qml)
+show this approach. Its preferred dimensions and fitting API belong to that
+plugin/host version. They are examples, not global dimensions or a dependency.
+
+Acceptance: measure the visible card's x/y/width/height, requested dimensions,
+navigation anchor and relevant primary-content bounds. Exercise tab A → B → A,
+editor open/close, disclosures and meaningful loading/error transitions under
+unchanged external geometry. Compare against the initial values with an explicit
+rounding tolerance. Repeat the applicable cases for a constrained screen and
+long text. Record live placement separately from fixture layout. A full-screen
+layer-shell window or a fixed capture canvas cannot establish card stability.
+
 ## Review tasks, states and transitions
 
 First perform an expert walkthrough: can someone identify the context, find the

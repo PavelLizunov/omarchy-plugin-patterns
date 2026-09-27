@@ -55,6 +55,11 @@ Inline annotations use the host's presentation capability when available. This
 package installs no capture MCP or server. A fixture render, report interaction
 and live native behavior are separate evidence surfaces.
 
+Tabbed panels have an explicit [stable frame pattern](references/design-review.md#keep-tabbed-panel-geometry-stable):
+one shared size request, host screen fitting, internal scrolling and checks of
+the visible card across tab/editor transitions. Each plugin implements it in
+its own layout; loading this skill alone does not change existing plugins.
+
 ## What the agent reads
 
 The skill directs the agent to the references relevant to its task:

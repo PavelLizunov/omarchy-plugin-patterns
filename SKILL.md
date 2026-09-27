@@ -50,6 +50,10 @@ to findings; fixes follow the user's scope. Discover capture/MCP/inline tools
 actually available in the current host. Missing capabilities stay unverified.
 No new server, native-control permission or full static audit is implied.
 
+For tabbed panels and reports such as “окно прыгает”, use
+[stable panel geometry](references/design-review.md#keep-tabbed-panel-geometry-stable):
+shared frame ownership, internal scrolling and measured transition checks.
+
 ## Implementation defaults
 
 Prefer A reactive C++ services (no plugin polling/processes); B one bounded streaming helper with retry ≥2 seconds; C gated detail polling or dual-cadence panel status; D native FileView instead of telemetry CLI commands. D may use C's gated reload. These are starting policies, not universal timing requirements or measured performance results. Every resource needs owner, admission gate, finite budget and stop path.

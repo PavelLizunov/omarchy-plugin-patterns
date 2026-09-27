@@ -74,6 +74,12 @@ and returning to the original page. Record panel origin, bounds, primary-content
 size, navigation anchor, scroll and focus. A before/after pair can show settled
 differences; actual movement or animation needs permitted temporal evidence.
 
+For tabbed panels, apply [stable panel geometry](design-review.md#keep-tabbed-panel-geometry-stable).
+Capture the visible card and record its requested/fitted dimensions. Measuring
+only a full-screen host window or forcing a common fixture/capture size can hide
+page-driven resizing. Screenshots of the same dimensions alone do not pass the
+transition check; retain the consumer's sizing bindings and observe the card.
+
 ## Build the clickable review
 
 Use the host's available inline visualization capability. In Codex, discover and
