@@ -6,7 +6,7 @@ Use it when building a plugin or reviewing an existing one. The guides cover que
 
 ## Install in OpenCode
 
-Requires OpenCode with skill support. The package is six Markdown documents: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
+Requires OpenCode with skill support. The package contains Markdown guides: no compiled libraries, npm packages, Python runtime, daemon or paid service is needed. Git is required only for the clone/update method below. A plugin you build may have its own dependencies.
 
 Clone into a new directory. If the destination already exists, inspect it first and preserve any local edits:
 
@@ -30,7 +30,38 @@ A Russian prompt is also supported:
 
 Confirm that the agent loads the skill. If it is missing, check the folder and `SKILL.md` spelling, duplicate skill names, skill-tool enablement and OpenCode permissions. Report a denied skill rather than bypassing the denial. See the [OpenCode documentation](https://opencode.ai/docs/skills/) for discovery rules.
 
-For manual installation, copy `SKILL.md` and the five `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
+For manual installation, copy `SKILL.md` and all `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
+
+## Explicit design review
+
+In Codex, invoke the installed skill by its exact name:
+
+> $omarchy-plugin-patterns Проверь дизайн этого Omarchy-плагина: получи реальные снимки всех значимых экранов и состояний, проверь переходы, фокус, закрытие, сохранение, ошибки и переводы. Покажи кликабельное ревью с выделенными областями. Отдели найденные ошибки от предположений и непроверенного. Сначала замечания, без исправлений.
+
+In OpenCode, ask explicitly: “Load omarchy-plugin-patterns and perform a design
+review with inspected screenshots and numbered annotations.” Confirm the agent
+reads this skill and its two design references. A shortened label such as
+“Pattern” is not the exact skill identifier.
+
+See [Codex skill invocation](https://learn.chatgpt.com/docs/build-skills).
+In the target chat, inspect its skill catalog/selector; if this name is missing,
+report discovery rather than pretending it loaded. Refer to the installed local
+SKILL.md path when needed and verify that its references are read. Explicit
+invocation does not require disabling
+automatic selection.
+
+The workflow discovers available capture tools and reuses the owning QML harness.
+Inline annotations use the host's presentation capability when available. This
+package installs no capture MCP or server. High-resolution capture first follows
+[visual preflight](references/visual-review.md), then the
+[rerender guide](references/screenshot-rerender.md), preserving logical geometry
+and declaring source/target DPR. A fixture render, report interaction
+and live native behavior are separate evidence surfaces.
+
+Tabbed panels have an explicit [stable frame pattern](references/design-review.md#keep-tabbed-panel-geometry-stable):
+one shared size request, host screen fitting, internal scrolling and checks of
+the visible card across tab/editor transitions. Each plugin implements it in
+its own layout; loading this skill alone does not change existing plugins.
 
 ## What the agent reads
 
@@ -43,7 +74,10 @@ The skill directs the agent to the references relevant to its task:
 | [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence grades |
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
+| [design-review.md](references/design-review.md) | Native design, tasks, states, transitions and bounded acceptance |
+| [visual-review.md](references/visual-review.md) | Capture capabilities, QML fixtures, provenance and clickable annotations |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
+| [screenshot-rerender.md](references/screenshot-rerender.md) | Source-based QML rerenders and before/after comparison pages |
 
 A Localization Readiness Review covers one authorized plugin. It separates suspected patterns from demonstrated defects and reports source readiness, locale fill, structural validity and language-review coverage independently. Missing denominators remain unknown. This mode produces a review, not bulk scans, translation runtimes, exports or automatic pull requests.
 
@@ -68,7 +102,7 @@ Keep the recorded commit for reproducible tests until you intentionally update. 
 
 ## Limits and feedback
 
-These are community recommendations, not an official Omarchy API or security certification. A Markdown skill cannot force a model to follow instructions. Review its changes and dependencies, then run the authorized checks for the installed host before using a plugin. Installing the skill itself executes no plugin code.
+These are community recommendations, not an official Omarchy API, current Marketplace policy or security certification. Specialized contracts such as the SEC-005 WebP profile apply only when adopted by the project. Independent review is a gate when required by the project workflow; ordinary scoped work can report direct self-review. A Markdown skill cannot force a model to follow instructions. Review its changes and dependencies, then run the authorized checks for the installed host before using a plugin. Installing the skill itself executes no plugin code.
 
 Static review can identify a configured timer or command, but CPU, battery use and runtime behavior need measurements. Translation accuracy, rendered layout, RTL and screen-reader behavior need their own checks as well: valid keys and fluent-looking text do not establish those results. Unavailable reviewers, denied tools and unperformed checks must be reported, not simulated.
 
