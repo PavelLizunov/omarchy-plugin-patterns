@@ -24,6 +24,8 @@ checks. Audit-only and explicit no-process tasks remain read-only.
 4. Read the installed, versioned QML Preview MCP README through its configured
    command/source location. Version 0.2.0 adds PNG delivery, initial root properties,
    explicit locale, objectName measurements and explicit dependency hashes.
+   Version 0.3.0 adds explicit geometryChecks, bounded snapshot, warningsPolicy
+   and wrapper/renderer pairing. Discover support before using these arguments.
    Keep installation and renderer implementation in that project, not each plugin.
    Source and installation contract: [QML Preview MCP](https://github.com/PavelLizunov/qml-preview-mcp).
    Record the installed version/commit; a moving upstream README is not evidence
@@ -53,6 +55,14 @@ checks. Audit-only and explicit no-process tasks remain read-only.
 - For geometry changes, request unique `measureObjects` objectName values. These
   are axis-aligned logical scene bounds, not compositor placement. Preserve actual
   sizing bindings; forcing a capture canvas must not conceal page-driven resize.
+  On 0.3.0 use geometryChecks for declared alignment, symmetry, bounds, sizes and
+  spacing invariants with a logical-unit tolerance. Do not enforce symmetry or
+  no-overlap on deliberately asymmetric/layered designs. Failed checks retain a
+  diagnostic PNG: inspect it, correct authorized findings and rerender. Use the
+  bounded visual snapshot to discover names/state, not as a screen-reader test.
+  Prefer warningsPolicy error for fixture acceptance; investigate typed warnings
+  and explain any explicit report-policy exception. Geometry/diagnostic PASS is
+  separate from native design, anti-slop and interaction acceptance.
 
 ## Native design and anti-slop review
 
