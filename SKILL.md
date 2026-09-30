@@ -43,6 +43,18 @@ infer runtime measurements, ecosystem percentiles or certification from it.
 
 Use companion manifest/lifecycle or host-integration skills when available and relevant; otherwise inspect the installed owning sources and report specific gaps. A focused fix does not require a full audit. Continue already-authorized work without repeated approval; installation, desktop changes and publication need their own applicable authority. Missing capture or review tools limit the corresponding claim, not useful source work. Native host components, theme and the user's product contract take precedence over generic web-design advice; translation editing does not imply UI redesign.
 
+## Required visual development cycle
+
+For plugin UI implementation, layout/state changes, or human-facing copy edits,
+follow [the QML visual cycle](references/qml-visual-cycle.md) without waiting for
+an explicit screenshot request. Discover the installed `qml-preview` MCP tools;
+run healthcheck, render the reviewed actual consumer after each coherent visible
+change and before delivery, inspect the image, apply native design and anti-slop
+review, then rerender authorized corrections. Missing tools/imports/inert fixtures
+remain concrete blockers. Skill loading never installs or enables MCP and never
+authorizes production-shell or desktop access. Backend-only and read-only work
+preserve their scope. Reuse evidence only when relevant dependencies still match.
+
 ## Explicit design-review invocation
 
 `$omarchy-plugin-patterns` plus “проверь дизайн со скринами и выделением проблем”

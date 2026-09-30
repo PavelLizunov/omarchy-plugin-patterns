@@ -34,6 +34,19 @@ For manual installation, copy `SKILL.md` and all `references/*.md` files into th
 
 ## Explicit design review
 
+### Routine visual development
+
+Plugin UI/copy work now follows [the required QML visual cycle](references/qml-visual-cycle.md)
+without needing an explicit screenshot request: preflight the available MCP,
+render the reviewed actual consumer after coherent changes, inspect its image,
+perform native design/anti-slop review, fix authorized defects and rerender.
+The installed [QML Preview MCP](https://github.com/PavelLizunov/qml-preview-mcp)
+0.2.0 README owns its installation and tool contract.
+Discover tools and read that version's documentation; this skill never installs
+or enables the server. Missing capabilities remain concrete acceptance blockers.
+Development previews use harness image reading, not production desktop capture
+or external image viewers. Backend-only/read-only work retains its scope.
+
 In Codex, invoke the installed skill by its exact name:
 
 > $omarchy-plugin-patterns Проверь дизайн этого Omarchy-плагина: получи реальные снимки всех значимых экранов и состояний, проверь переходы, фокус, закрытие, сохранение, ошибки и переводы. Покажи кликабельное ревью с выделенными областями. Отдели найденные ошибки от предположений и непроверенного. Сначала замечания, без исправлений.
@@ -78,6 +91,7 @@ The skill directs the agent to the references relevant to its task:
 | [visual-review.md](references/visual-review.md) | Capture capabilities, QML fixtures, provenance and clickable annotations |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
 | [screenshot-rerender.md](references/screenshot-rerender.md) | Source-based QML rerenders and before/after comparison pages |
+| [qml-visual-cycle.md](references/qml-visual-cycle.md) | Required render/inspect/native-design/anti-slop loop for UI development |
 
 A Localization Readiness Review covers one authorized plugin. It separates suspected patterns from demonstrated defects and reports source readiness, locale fill, structural validity and language-review coverage independently. Missing denominators remain unknown. This mode produces a review, not bulk scans, translation runtimes, exports or automatic pull requests.
 

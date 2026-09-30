@@ -8,6 +8,11 @@ hardware, publication or system-configuration authority.
 
 ## Establish the native design contract
 
+UI implementation and visible copy changes also follow the required
+[QML visual cycle](qml-visual-cycle.md), including native anti-slop review and
+image inspection after coherent edits. Explicit design-review invocation is not
+required for that development acceptance step.
+
 Read the plugin's design/behavior documents and relevant current source. Record
 plugin ID/kind, intended tasks, host/client version, candidate HEAD plus dirty-file
 identity, consumer entry points, available tools and test surface. A bar popover,

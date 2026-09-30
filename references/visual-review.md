@@ -7,6 +7,12 @@ dimensions, imports, fixtures and commands belong in that project's documents.
 
 ## Select the evidence surface
 
+For UI development, follow [the required QML cycle](qml-visual-cycle.md). Discover
+the installed qml-preview MCP and its schema, preflight with healthcheck, and use
+render_qml on reviewed actual-consumer fixtures. Version 0.2.0 can return a PNG
+attachment or an explicit path. Inspect it through the harness, never an external
+viewer or the user's production desktop for development previews.
+
 Inventory the tools actually available in this session before making a capture
 claim. Separate these capabilities:
 

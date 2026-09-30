@@ -12,6 +12,11 @@ First apply [visual-review](visual-review.md): inventory allowed capture tools, 
 
 ## Render at 2×
 
+An installed qml-preview MCP 0.2.0 supports explicit `dpr: 2`; first discover its
+current schema and follow [the QML visual cycle](qml-visual-cycle.md). Preserve
+logical geometry, inspect the PNG attachment or harness-read PNG, and record
+actual pixel dimensions. Loading this guide does not install or enable MCP.
+
 - Record logical geometry, source pixel dimensions and device-pixel ratio (DPR) separately, including crop origin and any letterboxing. Pixel dimensions alone do not establish logical size. If source DPR/geometry is unknown, identify the assumption instead of deriving layout size from the PNG.
 - Keep the QML consumer's logical geometry unchanged and select an explicit target density, normally 2 pixels per logical unit (DPR 2). For a 400×300 logical card, DPR 1 is 400×300 pixels and DPR 2 is 800×600. A source already at DPR 2 needs DPR 4 only if the request is specifically twice its existing pixel dimensions. Use the project's verified high-DPI capture path; confirm saved dimensions and redrawn text/vector edges. Do not enlarge a PNG or double the layout dimensions by mistake.
 - Prefer the project's existing offscreen Qt Quick test runner and software backend for repeatable captures. For example, the MX Ergo workflow uses `qmltestrunner` with `QT_QPA_PLATFORM=offscreen` and `QT_QUICK_BACKEND=software`; use the target project's imports and runner rather than copying machine-specific absolute paths.
