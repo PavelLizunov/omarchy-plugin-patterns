@@ -1,6 +1,6 @@
 ---
 name: omarchy-plugin-patterns
-description: "Design, build and review Omarchy Quattro plugins: native UI/UX, QML captures, architecture, processes and localization. Not for generic web UI or unrelated QML."
+description: "Design, build and review Omarchy Quattro plugins: native UI/UX, icon adaptation, QML captures, architecture, processes and localization. Use for Omarchy-style plugin glyphs and native-size legibility. Not for generic web UI or unrelated QML."
 license: MIT
 ---
 
@@ -28,6 +28,7 @@ Load only relevant references, relative to this file, not the working directory:
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
 | Design/UX; states, transitions, native styling and evidence | [design-review](references/design-review.md) |
+| Omarchy-style icon adaptation; native bar glyphs and microgauges | [icon-adaptation](references/icon-adaptation.md), then [QML visual cycle](references/qml-visual-cycle.md) |
 | Screenshots, QML captures and clickable highlighted review | [visual-review](references/visual-review.md) |
 | Localization Readiness Review; UI strings, translation, CLDR, RTL, a11y, anti-slop | [localization-review](references/localization-review.md) |
 | High-resolution screenshots from available QML UI sources | [visual-review](references/visual-review.md), then [screenshot-rerender](references/screenshot-rerender.md) |
@@ -54,6 +55,17 @@ review, then rerender authorized corrections. Missing tools/imports/inert fixtur
 remain concrete blockers. Skill loading never installs or enables MCP and never
 authorizes production-shell or desktop access. Backend-only and read-only work
 preserve their scope. Reuse evidence only when relevant dependencies still match.
+
+## Optional Omarchy-style icon adaptation
+
+When asked to fit or restyle a plugin icon for Omarchy, read
+[icon-adaptation](references/icon-adaptation.md). Preserve identity and the actual
+host slot; compare native-size SVG/QML renders, not only enlargements. Trace
+palette and Qt decoding, describe microgauge resolution/low-load limits, and
+show inspected PNGs inline through the harness. Keep silhouette, face, fill and
+installation decisions separate. This is an additive design mode, not forced
+logo imitation, a new image-generation route or deployment permission. The
+existing visual cycle still owns offscreen verification.
 
 ## Explicit design-review invocation
 

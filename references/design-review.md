@@ -38,6 +38,14 @@ font/radius/control-size recipes as version-specific examples. Reserve bounds
 across hover/focus/selection so a border or label does not shift the control.
 Avoid introducing a second design system when host facilities meet the need.
 
+## Icon-specific adaptation
+
+For requested Omarchy-style glyph work, use
+[icon adaptation](icon-adaptation.md) before the visual cycle. Inspect the actual
+native slot and pixel budget; preserving identity and showing native-size
+microgauge states matter more than a convincing enlargement. This optional mode
+does not restyle unrelated brands or infer deployment from a design choice.
+
 ## Keep tabbed panel geometry stable
 
 For tabs and editors within one task surface, keep the visible card's width,

@@ -76,6 +76,23 @@ one shared size request, host screen fitting, internal scrolling and checks of
 the visible card across tab/editor transitions. Each plugin implements it in
 its own layout; loading this skill alone does not change existing plugins.
 
+## Omarchy-style icons
+
+An optional [icon-adaptation workflow](references/icon-adaptation.md) covers
+making a plugin glyph fit Omarchy's native bar without forcing every brand into
+the same logo. It uses the existing SVG/QML consumer and visual cycle: inspect
+real slot/palette contracts, compare native-size views with labeled enlargements,
+check tiny gauge resolution and Qt data-URL decoding, and show saved PNGs inline.
+Shape, face, fill and production-integration decisions stay separate.
+
+For example, ask:
+
+> Load omarchy-plugin-patterns and adapt this plugin icon to Omarchy's stepped style. Preserve its meaning and normal bar slot. Show native-size SVG comparisons inline, including low/high/stale states where relevant. Keep the drafts separate from production until the intended design and integration scope are clear.
+
+The reference includes a reproduced Qt 6.12 SVG sizing example, not a universal
+compatibility or readability promise. This addition is Markdown guidance; it
+installs no renderer, model, provider, shell process or automatic deployment.
+
 ## What the agent reads
 
 The skill directs the agent to the references relevant to its task:
@@ -88,6 +105,7 @@ The skill directs the agent to the references relevant to its task:
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
 | [design-review.md](references/design-review.md) | Native design, tasks, states, transitions and bounded acceptance |
+| [icon-adaptation.md](references/icon-adaptation.md) | Optional Omarchy-style glyphs, native-size legibility, microgauge resolution and SVG decoding |
 | [visual-review.md](references/visual-review.md) | Capture capabilities, QML fixtures, provenance and clickable annotations |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |
 | [screenshot-rerender.md](references/screenshot-rerender.md) | Source-based QML rerenders and before/after comparison pages |
