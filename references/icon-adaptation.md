@@ -9,6 +9,12 @@ Verdict: Extend the existing SVG/QML consumer and
 [QML visual cycle](qml-visual-cycle.md), not a second renderer or design system.
 This reference grants no deployment, desktop capture, provider or account access.
 
+For panel UI work, also apply
+[internal panel iconography](design-review.md#internal-panel-iconography).
+Reusing a selected brand mark in the header is separate from semantic icons beside
+section/action labels. A successful bar icon does not settle either panel check;
+keep the labels and use native icon-capable controls without redesigning the bar.
+
 ## 1. Establish identity and the actual pixel budget
 
 - Read the installed icon consumer, slot, optical canvas, palette and versions.

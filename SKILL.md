@@ -56,6 +56,19 @@ remain concrete blockers. Skill loading never installs or enables MCP and never
 authorizes production-shell or desktop access. Backend-only and read-only work
 preserve their scope. Reuse evidence only when relevant dependencies still match.
 
+## Internal panel iconography
+
+For plugin panel implementation or redesign, apply
+[internal panel iconography](references/design-review.md#internal-panel-iconography).
+Reuse the plugin's own mark for identity where available, and meaningful native
+icons beside text labels for primary destinations, section headings and actions.
+A branded header or bar icon alone does not satisfy internal action iconography.
+Keep labels and accessible names; use the installed host's icon-capable controls
+and theme roles, not a new icon library or decorative symbol on every value.
+Check glyph meaning, state, font support, text bounds and constrained/localized
+layouts through the existing visual and interaction cycle. Explicit user/host
+exceptions win. This is a design rule, not an automatic hook or an obedience claim.
+
 ## Optional Omarchy-style icon adaptation
 
 When asked to fit or restyle a plugin icon for Omarchy, read

@@ -46,6 +46,53 @@ native slot and pixel budget; preserving identity and showing native-size
 microgauge states matter more than a convincing enlargement. This optional mode
 does not restyle unrelated brands or infer deployment from a design choice.
 
+## Internal panel iconography
+
+Treat identity and semantic icons as two separate requirements when implementing
+or redesigning a plugin panel:
+
+- **Identity:** reuse the plugin's existing mark beside its title/context when
+  available. Keep the user-selected bar silhouette and palette unless the task
+  explicitly changes them. A neighboring plugin is a layout precedent, not a
+  brand to copy. Scale through native tokens and reuse the existing state inputs;
+  an internal mark must not add polling or pretend to display live measurements.
+- **Semantic icons:** put meaningful icons beside retained text labels for primary
+  destinations, section headings and key actions such as read, clipboard, capture,
+  files, settings, playback, save and deletion. A header-only mark is insufficient
+  when the task requires icons next to internal words/actions. Inventory the
+  affected destinations and actions before editing and check coverage afterward.
+  Descriptive paragraphs, filenames, endpoints, values and every form field do
+  not need decorative icons; record justified exceptions rather than sprinkling
+  symbols indiscriminately.
+
+Inspect installed APIs first. Where supported, prefer native `Button.iconText`
+with `Button.text`, keeping handlers, enabled states, keyboard affordances and
+accessible action names. A section header may have no icon property: use a small
+row of a native-font glyph and the existing text header without inventing an API.
+Reuse established host glyphs and theme font/spacing/color tokens; verify that
+those glyphs exist in the resolved font. A matching native meaning wins over an
+external icon library. Use one coherent vocabulary, and distinguish a token/key
+from a keyboard shortcut, and a capture area from a whole screen.
+
+Icons supplement labels; they do not replace the text that names an operation.
+Keep glyphs separate from localized strings and user data. Pair play/pause or
+show/hide glyph changes with the actual control state; deletion must remain a
+clearly named destructive action with its existing confirmation. Decorative
+identity/section glyphs should not become extra focus stops or duplicate spoken
+labels. Accessible properties in source are not screen-reader verification.
+
+Acceptance uses the existing QML visual cycle, not a second renderer. Inspect
+normal and relevant state/editor images at native size. Measure icon/text bounds,
+alignment, clipping and spacing in actual controls under supported locales and
+constrained width or increased text scale. If icon plus label no longer fits,
+reflow the action row or use the host's supported layout; do not silently drop
+labels, shrink all type, widen the bar or substitute icon-only actions. Check
+that existing click/key routes, focus, dismissal and section hierarchy remain.
+Report identity coverage, semantic coverage, justified omissions, image inspection
+and interaction evidence separately. Missing font/render/input capability is an
+explicit gap. Markdown guidance and a fixture PASS cannot guarantee future model
+compliance, user recognition, live theme behavior or assistive-technology support.
+
 ## Keep tabbed panel geometry stable
 
 For tabs and editors within one task surface, keep the visible card's width,

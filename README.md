@@ -76,6 +76,20 @@ one shared size request, host screen fitting, internal scrolling and checks of
 the visible card across tab/editor transitions. Each plugin implements it in
 its own layout; loading this skill alone does not change existing plugins.
 
+## Internal panel icons
+
+Panel implementation and redesign include
+[internal iconography](references/design-review.md#internal-panel-iconography):
+reuse the plugin's own mark for context and meaningful native icons beside
+section/action labels. A bar or header icon alone is not action-icon coverage.
+Text labels, accessibility names and existing behaviors remain; descriptive
+values do not need decorative symbols. The guide checks glyph meaning/font
+support and icon-plus-text bounds in localized, constrained actual consumers.
+It is Markdown guidance, not an installed hook or a guarantee of agent compliance.
+Run `python3 -B tests/check_panel_icon_guidance.py` for an offline check of the
+entry-point/reference wiring and a header-only negative control. It does not
+execute a model, render a plugin or prove future behavior.
+
 ## Omarchy-style icons
 
 An optional [icon-adaptation workflow](references/icon-adaptation.md) covers
