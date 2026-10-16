@@ -8,6 +8,28 @@
 - `root.opened`, `sleeping`, formatter, screen and theme adapters below are application contracts, not promised host APIs. Wire actual enable/suspend/disable events; unknown state must not authorize work. Render unavailable/loading/stale/error states through catalog keys.
 - Prefer existing platform features. A is reactive service; B is one owned streaming helper; C is gated/dual-cadence polling; D replaces command-based file reads. D can combine with C. These are architecture policies, not corpus prevalence or CPU claims.
 
+## User installation path
+
+Before sharing a plugin, put a copyable installation command near the top of its
+README, before long feature/media sections. State prerequisites, use the exact
+public repository URL and stable manifest ID, and distinguish install, required
+local build/setup, and enablement. Prefer the installed native `omarchy plugin add`
+flow; check its current options instead of inventing an installer. If setup is
+required, keep the plugin disabled until it succeeds and chain the steps so a
+failed install/build cannot continue to enablement. Keep source-development and
+test instructions separate from the normal user path; include update/removal
+links and disclose what installation changes.
+
+Inspect the actual Marketplace detail page and catalog entry as a separate
+consumer. A manual installation override can hide the command even when the root
+manifest validates; README edits do not change that catalog setting. Confirm the
+source link reaches the instructions. If automatic installation is intended,
+record the required catalog correction separately rather than claiming it is
+published. Verify the documented path in an isolated fresh destination where
+possible, and label stubbed shell dispatch separately from real loaded behavior.
+This is delivery guidance, not an official Marketplace requirement or publication
+authority.
+
 ## Diagnose and change only what is needed
 
 Before a fix, record the symptom, expected behavior, host/source version and a safe reproduction. If reproduction is unavailable, state the limit instead of inventing a failure. Trace the relevant binding, callback or process lifecycle; name one hypothesis and the observation that would disprove it. Prefer one attributable change over several speculative fixes. For a new feature, define the observable result first.

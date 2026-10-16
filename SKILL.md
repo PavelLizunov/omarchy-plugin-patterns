@@ -24,6 +24,7 @@ Load only relevant references, relative to this file, not the working directory:
 | Task | Read |
 |---|---|
 | Build/refactor; architecture; data/ownership | [plugin-authoring](references/plugin-authoring.md) |
+| README install commands; setup and Marketplace availability | [user installation path](references/plugin-authoring.md#user-installation-path) |
 | Full static audit; six dimensions; reference matrix; evidence | [plugin-review](references/plugin-review.md) |
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
