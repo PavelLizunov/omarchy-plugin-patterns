@@ -32,6 +32,23 @@ Confirm that the agent loads the skill. If it is missing, check the folder and `
 
 For manual installation, copy `SKILL.md` and all `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
 
+## Marketplace installation is part of delivery
+
+For ordinary one-command plugins, the skill treats the first user install as a
+critical publication acceptance check. Start at the live Marketplace detail
+page, copy its native command and verify a fresh packaged install and useful
+result. A `Verified` badge, README snippet or passing CI cannot replace that
+consumer check. A retained `Manual setup` override keeps this criterion open;
+request the supported exact-snapshot correction and verify the deployed card.
+Genuinely manual prerequisites and unavailable checks remain explicit exceptions,
+not invented toolchain requirements or automatic approval. The current native
+command follows mutable upstream HEAD, separately from the verified snapshot.
+
+See the [user installation path](references/plugin-authoring.md#user-installation-path).
+Run `python3 -B tests/check_installation_guidance.py` for offline guidance wiring
+and false-success controls. It does not run a model, install a plugin, approve a
+listing or establish actual Marketplace behavior.
+
 ## Explicit design review
 
 ### Routine visual development

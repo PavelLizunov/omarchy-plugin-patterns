@@ -8,6 +8,62 @@
 - `root.opened`, `sleeping`, formatter, screen and theme adapters below are application contracts, not promised host APIs. Wire actual enable/suspend/disable events; unknown state must not authorize work. Render unavailable/loading/stale/error states through catalog keys.
 - Prefer existing platform features. A is reactive service; B is one owned streaming helper; C is gated/dual-cadence polling; D replaces command-based file reads. D can combine with C. These are architecture policies, not corpus prevalence or CPU claims.
 
+## User installation path
+
+**Critical delivery gate:** for an ordinary plugin intended for one-command
+installation, a user must be able to start at the Marketplace detail page, copy
+one native command and obtain the working plugin. A published or `Verified`
+listing is not proof of installation availability. This is this skill's delivery
+criterion, not a claim that official policy forbids genuinely manual plugins.
+
+Before submission, put a copyable `omarchy plugin add <public-repository-url> --enable`
+command near the top of the README, before long feature/media sections. Use the
+exact public repository URL and stable manifest ID. Check the installed CLI's
+options rather than inventing an installer. Separate optional developer builds
+and tests from the ordinary user path. Do not require make, a compiler, a first-run
+download, an extra service or privileges when the reviewed package does not need
+them. Disclose real prerequisites, update/removal paths and changes to user state.
+If manual setup genuinely is necessary, document the reason and working steps,
+chain failures before enablement, and report the one-command exception explicitly.
+
+Test that exact packaged command in a fresh isolated destination without relying
+on a developer checkout, installed local artifacts or an undeclared toolchain.
+Check clone, validation, executable bits/assets/helpers, enable dispatch and a
+real useful result. Exercise failed installation/setup and existing-ID refusal
+without overwriting user data. Label any stubbed shell dispatch separately from
+actual loaded/physical behavior. For a bundled executable, bind it to reviewed
+source with a reproducible build and direct byte comparison when claiming that
+equivalence; repository-declared hashes alone do not supply independent proof.
+
+After publication, inspect both the live catalog entry and the actual Marketplace
+detail page. Require `installAvailable: true`, a non-empty correct `installCommand`,
+and a visible copy action that copies that command; an HTTP 200 or command hidden
+in HTML/source is not this check. Execute the copied command through the fresh
+consumer above. `Manual setup`, `installAvailable: false`, an empty/wrong command,
+failed copy or failed installation leaves one-command acceptance incomplete.
+A README command or green CI cannot substitute for the public consumer. Missing
+browser/clipboard/install evidence is NOT VERIFIED, not an inferred pass.
+
+Read current Marketplace verification/installation policy and issue templates.
+If a registry manual override hides the command, use the supported exact-listed-
+snapshot standard-installation request and provide the acknowledgment and
+packaging evidence, when that action is authorized. Reuse an open request for
+the same action; an already closed update is not an open installation request.
+Check baseline/review eligibility: an accepted bundled binary is not automatically
+eligible for an installer-only exception. A rejected/ineligible path needs an
+explicit maintainer decision or supported policy correction, not an approval
+label applied by the plugin author, a speculative code rewrite or hidden capability.
+Keep the request open/blocked with the concrete next owner until the live catalog
+and card actually change. A submitted request or approval label is not deployment.
+
+Record the reviewed full SHA and exact source installed by the command separately.
+The current native add/update command follows mutable upstream HEAD; do not invent
+an unsupported SHA option or claim installation is bound to the verified snapshot.
+Keep repository publication, verification, installation availability, fresh install,
+loaded identity and human acceptance separate. Publication can be complete while
+one-command acceptance is blocked; continue remaining authorized work or state
+the actual external blocker. This guidance grants no new publication authority.
+
 ## Diagnose and change only what is needed
 
 Before a fix, record the symptom, expected behavior, host/source version and a safe reproduction. If reproduction is unavailable, state the limit instead of inventing a failure. Trace the relevant binding, callback or process lifecycle; name one hypothesis and the observation that would disprove it. Prefer one attributable change over several speculative fixes. For a new feature, define the observable result first.

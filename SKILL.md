@@ -24,6 +24,7 @@ Load only relevant references, relative to this file, not the working directory:
 | Task | Read |
 |---|---|
 | Build/refactor; architecture; data/ownership | [plugin-authoring](references/plugin-authoring.md) |
+| README install commands; setup and Marketplace publication acceptance | [one-command installation gate](references/plugin-authoring.md#user-installation-path) |
 | Full static audit; six dimensions; reference matrix; evidence | [plugin-review](references/plugin-review.md) |
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
@@ -43,6 +44,19 @@ infer runtime measurements, ecosystem percentiles or certification from it.
 **Translation hook:** whenever human-facing strings change or are translated, follow extract → translate → anti-slop → verify in the localization reference. Discover and load an authorized translation skill and `anti-slop` only if available; otherwise apply the bundled local fallback and report that choice. No required external skill, automatic subprocess hook, recursive delegation or model override. Style never overrides meaning, technical tokens or uncertainty.
 
 Use companion manifest/lifecycle or host-integration skills when available and relevant; otherwise inspect the installed owning sources and report specific gaps. A focused fix does not require a full audit. Continue already-authorized work without repeated approval; installation, desktop changes and publication need their own applicable authority. Missing capture or review tools limit the corresponding claim, not useful source work. Native host components, theme and the user's product contract take precedence over generic web-design advice; translation editing does not imply UI redesign.
+
+## Critical Marketplace installation acceptance
+
+For an ordinary plugin intended for one-command installation, the user's first
+successful install is a critical delivery criterion, not optional README polish.
+Follow the [user installation path](references/plugin-authoring.md#user-installation-path)
+before submission and after publication: test the packaged native command, then
+verify that the live Marketplace detail page exposes and copies that command.
+`Verified`, a README snippet and passing CI do not prove install availability.
+`Manual setup`, `installAvailable: false` or an empty `installCommand` leave this
+criterion open even when listing publication itself succeeded. Record a genuine
+manual-setup exception explicitly; do not invent a compiler/setup prerequisite or
+claim that a maintainer request already changed the public card.
 
 ## Required visual development cycle
 
