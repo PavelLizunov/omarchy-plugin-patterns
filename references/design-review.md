@@ -8,6 +8,14 @@ hardware, publication or system-configuration authority.
 
 ## Establish the native design contract
 
+For product decisions and UI implementation, first read
+[the design language](design-language.md). It consolidates maintainer preferences
+for task-complete compact views, quiet host styling, recognizable icons, explicit
+navigation, action priority and ordinary desktop interactions. Apply relevant
+rules without turning one project's dimensions or exceptions into universal law.
+It complements this review procedure rather than adding a second checklist or
+renderer. Discretionary checks follow the current user's request and host policy.
+
 UI implementation and visible copy changes also follow the required
 [QML visual cycle](qml-visual-cycle.md), including native anti-slop review and
 image inspection after coherent edits. Explicit design-review invocation is not

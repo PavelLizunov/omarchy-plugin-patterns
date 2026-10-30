@@ -32,6 +32,22 @@ Confirm that the agent loads the skill. If it is missing, check the folder and `
 
 For manual installation, copy `SKILL.md` and all `references/*.md` files into the skill directory and retain the LICENSE with redistributed copies. A Claude-compatible layout is `~/.claude/skills/omarchy-plugin-patterns/`; avoid duplicate copies that OpenCode might also discover. Confirm loading in the actual client, since file layout alone cannot establish it.
 
+## Design language from maintainer iterations
+
+[The design language](references/design-language.md) turns recurring design
+feedback into implementation defaults: task-complete compact views, less noise
+without smaller essential content, stable geometry, live host styling,
+recognizable native-weight icons, internal action iconography, explicit navigation,
+visible operational controls and truthful feedback. It also covers contrast,
+clipboard/text behavior, restrained shortcuts and configuration-heavy tools.
+
+The entry point routes visible UI work here before the relevant review procedure.
+Project-specific numbers and exceptions stay contextual. The guide includes pinned
+community provenance from `huacnlee/omarchy-style` and
+`tcballard/build-omarchy-plugins`; it neither installs those skills nor bundles
+private conversations. Its execution policy defers discretionary checks to the
+current user and host. Markdown guidance is not proof of future agent behavior.
+
 ## Explicit design review
 
 ### Routine visual development
@@ -87,6 +103,7 @@ The skill directs the agent to the references relevant to its task:
 | [plugin-review.md](references/plugin-review.md) | Six-dimensional static review, reference matrix and evidence grades |
 | [security-review.md](references/security-review.md) | Argv, authorization, secrets and configuration writes |
 | [performance-review.md](references/performance-review.md) | Services, streaming helpers, timers and FileView |
+| [design-language.md](references/design-language.md) | Maintainer-derived UI defaults, compact task completeness, native composition and pinned community provenance |
 | [design-review.md](references/design-review.md) | Native design, tasks, states, transitions and bounded acceptance |
 | [visual-review.md](references/visual-review.md) | Capture capabilities, QML fixtures, provenance and clickable annotations |
 | [localization-review.md](references/localization-review.md) | Readiness inventory, translation, CLDR plurals, RTL and accessibility |

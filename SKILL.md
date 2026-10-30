@@ -27,7 +27,8 @@ Load only relevant references, relative to this file, not the working directory:
 | Full static audit; six dimensions; reference matrix; evidence | [plugin-review](references/plugin-review.md) |
 | Processes, credentials, D-Bus, UDev, user configuration | [security-review](references/security-review.md) |
 | Reactive services, streams, polling, FileView, resource budgets | [performance-review](references/performance-review.md) |
-| Design/UX; states, transitions, native styling and evidence | [design-review](references/design-review.md) |
+| UI implementation/redesign; composition, compact mode, icons and interaction defaults | [design-language](references/design-language.md), then relevant [design-review](references/design-review.md) sections |
+| Design/UX review; states, transitions, native styling and evidence | [design-language](references/design-language.md), then [design-review](references/design-review.md) |
 | Screenshots, QML captures and clickable highlighted review | [visual-review](references/visual-review.md) |
 | Localization Readiness Review; UI strings, translation, CLDR, RTL, a11y, anti-slop | [localization-review](references/localization-review.md) |
 | High-resolution screenshots from available QML UI sources | [visual-review](references/visual-review.md), then [screenshot-rerender](references/screenshot-rerender.md) |
@@ -42,6 +43,19 @@ infer runtime measurements, ecosystem percentiles or certification from it.
 **Translation hook:** whenever human-facing strings change or are translated, follow extract → translate → anti-slop → verify in the localization reference. Discover and load an authorized translation skill and `anti-slop` only if available; otherwise apply the bundled local fallback and report that choice. No required external skill, automatic subprocess hook, recursive delegation or model override. Style never overrides meaning, technical tokens or uncertainty.
 
 Use companion manifest/lifecycle or host-integration skills when available and relevant; otherwise inspect the installed owning sources and report specific gaps. A focused fix does not require a full audit. Continue already-authorized work without repeated approval; installation, desktop changes and publication need their own applicable authority. Missing capture or review tools limit the corresponding claim, not useful source work. Native host components, theme and the user's product contract take precedence over generic web-design advice; translation editing does not imply UI redesign.
+
+## Design defaults from maintainer iterations
+
+For visible plugin work, read [the design language](references/design-language.md).
+Compact must remain task-complete. Use quiet live host styling, aligned geometry
+and stable bar slots; match icon painted weight while preserving identity. Keep
+navigation explicit, frequent actions reachable, rare destructive actions out of
+accidental-click paths, feedback truthful and ordinary text/clipboard behavior
+intact. Use meaningful internal icons with enough labels, not mysterious glyphs
+or text walls. Preserve settled choices; specific user/host exceptions win.
+The reference distinguishes recurring product preferences, task-specific examples
+and pinned community sources. It does not impose tests or previews beyond the
+current user's request and the host execution policy.
 
 ## Required visual development cycle
 
